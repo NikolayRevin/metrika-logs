@@ -47,7 +47,7 @@ abstract class RequestCore
      */
     public function getAddress(): string
     {
-        return str_replace('{counterId}', self::$counterId, static::ADDRESS);
+        return str_replace('{counterId}', (string)self::$counterId, static::ADDRESS);
     }
 
     /**
