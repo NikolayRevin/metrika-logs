@@ -20,11 +20,10 @@ class CapabilityResponse
     /**
      * Оценка возможности создания запросов логов
      *
-     * @JMS\Type("Volga\MetrikaLogs\Responses\Types\LogRequestEvaluation")
-     *
      * @var LogRequestEvaluation
      */
-    protected $log_request_evaluation;
+    #[JMS\Type("Volga\MetrikaLogs\Responses\Types\LogRequestEvaluation")]
+    protected LogRequestEvaluation $log_request_evaluation;
 
     /**
      * Оценка возможности создания запросов логов

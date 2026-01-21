@@ -22,28 +22,28 @@ class CreateRequest extends RequestCore implements ParamRequest
      *
      * @var \DateTimeInterface
      */
-    protected $date1;
+    protected \DateTimeInterface $date1;
 
     /**
      * Последний день
      *
      * @var \DateTimeInterface
      */
-    protected $date2;
+    protected \DateTimeInterface $date2;
 
     /**
      * Список полей
      *
      * @var array
      */
-    protected $fields = [];
+    protected array $fields = [];
 
     /**
      * Источник логов
      *
      * @var string
      */
-    protected $source;
+    protected string $source;
 
     /**
      * Установка первого дня

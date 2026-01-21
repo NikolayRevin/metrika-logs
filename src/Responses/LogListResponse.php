@@ -19,11 +19,10 @@ class LogListResponse
     /**
      * Запросы
      *
-     * @JMS\Type("array<Volga\MetrikaLogs\Responses\Types\LogRequest>")
-     *
      * @var array
      */
-    protected $requests = [];
+    #[JMS\Type("array<Volga\MetrikaLogs\Responses\Types\LogRequest>")]
+    protected array $requests = [];
 
     /**
      * Есть ли запросы?

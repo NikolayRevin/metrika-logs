@@ -16,20 +16,18 @@ class LogRequestEvaluation
     /**
      * Возможность создания запроса логов за указанный период
      *
-     * @JMS\Type("bool")
-     *
      * @var bool
      */
-    protected $possible;
+    #[JMS\Type("bool")]
+    protected bool $possible;
 
     /**
      * Максимальное количество дней периода, который можно указать в запросах логов, с учетом текущей квоты
      *
-     * @JMS\Type("int")
-     *
      * @var int
      */
-    protected $max_possible_day_quantity;
+    #[JMS\Type("int")]
+    protected int $max_possible_day_quantity;
 
     /**
      * Возможность создания запроса логов за указанный период

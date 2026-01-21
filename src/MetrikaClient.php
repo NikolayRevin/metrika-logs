@@ -6,6 +6,7 @@ namespace Volga\MetrikaLogs;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Stream;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
@@ -29,7 +30,7 @@ use Volga\MetrikaLogs\Contracts\Request;
  */
 class MetrikaClient
 {
-    private $maps = [
+    private array $maps = [
         'json' => [
             Requests\LogListRequest::class => Responses\LogListResponse::class,
             Requests\CapabilityRequest::class => Responses\CapabilityResponse::class,
@@ -46,21 +47,21 @@ class MetrikaClient
      *
      * @var string
      */
-    private $token;
+    private string $token;
 
     /**
      * Клиент HTTP
      *
      * @var GuzzleClient
      */
-    private $http;
+    private GuzzleClient $http;
 
     /**
      * Сериалайзер
      *
      * @var Serializer
      */
-    private $serializer;
+    private Serializer $serializer;
 
     public function __construct(string $token)
     {
@@ -74,10 +75,10 @@ class MetrikaClient
     /**
      * Установка OAuth токена
      *
-     * @param  string  $token
+     * @param string $token
      * @return MetrikaClient
      */
-    public function setToken(string $token): MetrikaClient
+    public function setToken(string $token): self
     {
         $this->token = $token;
 
@@ -87,10 +88,10 @@ class MetrikaClient
     /**
      * Установка клиента HTTP
      *
-     * @param  GuzzleClient  $httpClient
+     * @param GuzzleClient $httpClient
      * @return MetrikaClient
      */
-    public function setHttpClient(GuzzleClient $httpClient): MetrikaClient
+    public function setHttpClient(GuzzleClient $httpClient): self
     {
         $this->http = $httpClient;
 
@@ -103,11 +104,12 @@ class MetrikaClient
      * @param $name
      * @param $arguments
      * @return array|mixed|object
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
+     * @throws \Exception
      */
-    public function __call($name, $arguments)
+    public function __call($name, $arguments): mixed
     {
-        if (0 === strpos($name, 'send')) {
+        if (str_starts_with($name, 'send')) {
             return $this->sendRequest(...$arguments);
         }
 
@@ -117,13 +119,12 @@ class MetrikaClient
     /**
      * Отправка запроса
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return array|mixed|object
-     * @throws \GuzzleHttp\Exception\GuzzleException|\Exception
+     * @throws GuzzleException|\Exception
      */
-    public function sendRequest(Request $request)
+    public function sendRequest(Request $request): mixed
     {
-
         try {
             $response = $this->http->request(
                 $request->getMethod(),
@@ -134,14 +135,13 @@ class MetrikaClient
             $response = $exception->getResponse();
         }
 
-
         return $this->deserialize($request, $response);
     }
 
     /**
      * Извлечение параметров запроса
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return array
      */
     private function extractOptions(Request $request): array
@@ -154,9 +154,7 @@ class MetrikaClient
         ];
 
         if ($request instanceof ParamRequest) {
-
             $options['query'] = $request->getParams();
-
         }
 
         return $options;
@@ -165,31 +163,27 @@ class MetrikaClient
     /**
      * Десериализация ответа
      *
-     * @param  Request  $request
-     * @param  ResponseInterface  $response
+     * @param Request $request
+     * @param ResponseInterface $response
      * @return array|mixed|object
      * @throws \Exception
      */
-    private function deserialize(Request $request, ResponseInterface $response)
+    private function deserialize(Request $request, ResponseInterface $response): mixed
     {
-
         $class = \get_class($request);
 
         foreach ($this->maps as $format => $map) {
-
             if (array_key_exists($class, $map)) {
-
                 if ((new \ReflectionClass($map[$class]))->implementsInterface(DeserializeResponseInterface::class)) {
                     return call_user_func([$map[$class], 'deserialize'], $this, $response, $format);
                 }
 
                 return $this->serializer->deserialize(
-                    (string) $response->getBody()->getContents(),
+                    (string)$response->getBody()->getContents(),
                     $map[$class],
                     $format
                 );
             }
-
         }
 
         throw new \Exception("Class [$class] not mapped.");

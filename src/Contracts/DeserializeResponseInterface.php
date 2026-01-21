@@ -17,10 +17,10 @@ interface DeserializeResponseInterface
     /**
      * Десериализация ответа
      *
-     * @param  MetrikaClient  $client
-     * @param  ResponseInterface  $response
-     * @param  string  $format
+     * @param MetrikaClient $client
+     * @param ResponseInterface $response
+     * @param string $format
      * @return mixed
      */
-    public static function deserialize(MetrikaClient $client, ResponseInterface $response, string $format);
+    public static function deserialize(MetrikaClient $client, ResponseInterface $response, string $format): mixed;
 }

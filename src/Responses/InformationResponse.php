@@ -20,11 +20,10 @@ class InformationResponse
     /**
      * Запрос
      *
-     * @JMS\Type("Volga\MetrikaLogs\Responses\Types\LogRequest")
-     *
      * @var LogRequest
      */
-    protected $log_request;
+    #[JMS\Type("Volga\MetrikaLogs\Responses\Types\LogRequest")]
+    protected LogRequest $log_request;
 
     /**
      * Запрос

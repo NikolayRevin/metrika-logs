@@ -22,7 +22,7 @@ class InformationRequest extends RequestCore implements Request
      *
      * @var null|int
      */
-    private static $requestId = null;
+    private static ?int $requestId = null;
 
     public function __construct(int $counterId, int $requestId)
     {

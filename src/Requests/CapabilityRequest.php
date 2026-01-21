@@ -22,33 +22,33 @@ class CapabilityRequest extends RequestCore implements ParamRequest
      *
      * @var \DateTimeInterface
      */
-    protected $date1;
+    protected \DateTimeInterface $date1;
 
     /**
      * Последний день
      *
      * @var \DateTimeInterface
      */
-    protected $date2;
+    protected \DateTimeInterface $date2;
 
     /**
      * Список полей
      *
      * @var array
      */
-    protected $fields = [];
+    protected array $fields = [];
 
     /**
      * Источник логов
      *
      * @var string
      */
-    protected $source;
+    protected string $source;
 
     /**
      * Установка первого дня
      *
-     * @param  \DateTimeInterface  $date
+     * @param \DateTimeInterface $date
      * @return CapabilityRequest
      */
     public function setDate1(\DateTimeInterface $date): CapabilityRequest
@@ -61,7 +61,7 @@ class CapabilityRequest extends RequestCore implements ParamRequest
     /**
      * Установка последнего дня
      *
-     * @param  \DateTimeInterface  $date
+     * @param \DateTimeInterface $date
      * @return CapabilityRequest
      */
     public function setDate2(\DateTimeInterface $date): CapabilityRequest
@@ -74,7 +74,7 @@ class CapabilityRequest extends RequestCore implements ParamRequest
     /**
      * Установка полей
      *
-     * @param  array  $fields
+     * @param array $fields
      * @return CapabilityRequest
      */
     public function setFields(array $fields): CapabilityRequest
@@ -87,7 +87,7 @@ class CapabilityRequest extends RequestCore implements ParamRequest
     /**
      * Установка источника логов
      *
-     * @param  string  $source
+     * @param string $source
      * @return CapabilityRequest
      */
     public function setSource(string $source): CapabilityRequest

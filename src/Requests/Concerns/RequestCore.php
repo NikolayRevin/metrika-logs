@@ -20,7 +20,7 @@ abstract class RequestCore
      *
      * @var null|int
      */
-    private static $counterId = null;
+    private static ?int $counterId = null;
 
     public function __construct(int $counterId)
     {

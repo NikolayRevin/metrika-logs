@@ -16,31 +16,28 @@ trait ErrorResponse
     /**
      * Ошибки
      *
-     * @JMS\Type("array<Volga\MetrikaLogs\Responses\Types\Error>")
-     *
      * @var array
      */
-    protected $errors = [];
+    #[JMS\Type("array<Volga\MetrikaLogs\Responses\Types\Error>")]
+    protected array $errors = [];
 
     /**
      * HTTP-статус ошибки
      *
-     * @JMS\SerializedName("code")
-     * @JMS\Type("string")
-     *
      * @var null|string
      */
-    protected $error_code;
+    #[JMS\SerializedName("code")]
+    #[JMS\Type("string")]
+    protected ?string $error_code;
 
     /**
      * Причина ошибки
      *
-     * @JMS\SerializedName("message")
-     * @JMS\Type("string")
-     *
      * @var null|string
      */
-    protected $error_message;
+    #[JMS\SerializedName("message")]
+    #[JMS\Type("string")]
+    protected ?string $error_message;
 
     /**
      * Есть ли ошибки?

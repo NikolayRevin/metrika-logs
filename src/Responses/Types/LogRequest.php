@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Volga\MetrikaLogs\Responses\Types;
 
+use DateTime;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -16,83 +17,74 @@ class LogRequest
     /**
      * Идентификатор запроса логов
      *
-     * @JMS\Type("int")
-     *
      * @var int
      */
-    protected $request_id;
+    #[JMS\Type("int")]
+    protected int $request_id;
 
     /**
      * Идентификатор счётчика
      *
-     * @JMS\Type("int")
-     *
      * @var int
      */
-    protected $counter_id;
+    #[JMS\Type("int")]
+    protected int $counter_id;
 
     /**
      * Источник логов
      *
-     * @JMS\Type("string")
-     *
      * @var string
      */
-    protected $source;
+    #[JMS\Type("string")]
+    protected string $source;
 
     /**
      * Первый день
      *
-     * @JMS\Type("DateTime<'Y-m-d'>")
-     *
-     * @var null|\DateTime
+     * @var null|DateTime
      */
-    protected $date1;
+    #[JMS\Type("DateTime<'Y-m-d'>")]
+    protected ?DateTime $date1;
 
     /**
      * Последний день
      *
-     * @JMS\Type("DateTime<'Y-m-d'>")
-     *
-     * @var null|\DateTime
+     * @var null|DateTime
      */
-    protected $date2;
+    #[JMS\Type("DateTime<'Y-m-d'>")]
+    protected ?DateTime $date2;
 
     /**
      * Список полей
      *
-     * @JMS\Type("array<string>")
-     *
      * @var array
      */
-    protected $fields = [];
+    #[JMS\Type("array<string>")]
+    protected array $fields = [];
 
     /**
      * Статус запроса
      *
-     * @JMS\Type("string")
-     *
      * @var string
      */
-    protected $status;
+    #[JMS\Type("string")]
+    protected string $status;
 
     /**
      * Размер логов запроса в байтах
      *
-     * @JMS\Type("int")
-     *
      * @var null|int
      */
-    protected $size;
+    #[JMS\Type("int")]
+    protected ?int $size;
 
     /**
      * Части ответа
      *
-     * @JMS\Type("array<Volga\MetrikaLogs\Responses\Types\LogRequestPart>")
-     *
      * @var array
      */
-    protected $parts = [];
+    #[JMS\Type("array<Volga\MetrikaLogs\Responses\Types\LogRequestPart>")]
+    protected array $parts = [];
 
     /**
      * Идентификатор запроса логов
@@ -127,9 +119,9 @@ class LogRequest
     /**
      * Первый день
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getDate1(): ?\DateTime
+    public function getDate1(): ?DateTime
     {
         return $this->date1;
     }
@@ -137,9 +129,9 @@ class LogRequest
     /**
      * Последний день
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getDate2(): ?\DateTime
+    public function getDate2(): ?DateTime
     {
         return $this->date2;
     }

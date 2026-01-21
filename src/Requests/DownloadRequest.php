@@ -22,14 +22,14 @@ class DownloadRequest extends RequestCore implements Request
      *
      * @var null|int
      */
-    private static $requestId = null;
+    private static ?int $requestId = null;
 
     /**
      * Номер части подготовленных логов обработанного запроса
      *
      * @var null|int
      */
-    private static $partNumber = null;
+    private static ?int $partNumber = null;
 
     public function __construct(int $counterId, int $requestId, int $partNumber)
     {

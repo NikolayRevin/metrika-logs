@@ -22,7 +22,7 @@ class CleanRequest extends RequestCore implements Request
      *
      * @var null|int
      */
-    private static $requestId = null;
+    private static ?int $requestId = null;
 
     public function __construct(int $counterId, int $requestId)
     {
@@ -34,7 +34,7 @@ class CleanRequest extends RequestCore implements Request
     /**
      * Установка запроса
      *
-     * @param  int  $requestId
+     * @param int $requestId
      * @return CleanRequest
      */
     public function setRequestId(int $requestId): CleanRequest

@@ -16,28 +16,25 @@ class Error
     /**
      * Тип ошибки
      *
-     * @JMS\Type("string")
-     *
      * @var string
      */
-    protected $error_type;
+    #[JMS\Type("string")]
+    protected string $error_type;
 
     /**
      * Причина ошибки
      *
-     * @JMS\Type("string")
-     *
      * @var string
      */
-    protected $message;
+    #[JMS\Type("string")]
+    protected string $message;
 
     /**
      * Место возникновения ошибки
      *
-     * @JMS\Type("string")
-     *
      * @var null|string
      */
+    #[JMS\Type("string")]
     protected $location;
 
     /**

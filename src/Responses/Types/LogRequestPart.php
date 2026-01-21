@@ -16,20 +16,18 @@ class LogRequestPart
     /**
      * Номер части
      *
-     * @JMS\Type("int")
-     *
      * @var int
      */
-    protected $part_number;
+    #[JMS\Type("int")]
+    protected int $part_number;
 
     /**
      * Размер в байтах
      *
-     * @JMS\Type("int")
-     *
      * @var int
      */
-    protected $size;
+    #[JMS\Type("int")]
+    protected int $size;
 
     /**
      * Номер части

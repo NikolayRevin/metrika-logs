@@ -10,11 +10,11 @@ use Illuminate\Support\ServiceProvider;
 class MetrikaLogsServiceProvider extends ServiceProvider
 {
 
-    public function boot()
+    public function boot(): void
     {
     }
 
-    public function provides()
+    public function provides(): array
     {
         return [MetrikaClient::class];
     }
